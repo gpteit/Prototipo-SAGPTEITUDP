@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Portal de gestión de procesos de titulación EIT-UDP</title>
+    {% load staticfiles %}
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                  aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">UDP</a>
+        </div>
+        {% if user.is_authenticated %}
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li id="dashboard"><a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li id="report" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Reportar<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li id="create_report"><a href="{% url 'create_report'%}">Reportar</a></li>
+              </ul>
+            </li>
+            <li id="student" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Estudiantes<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li id="create_student"><a href="{% url 'create_student' %}">Crear estudiante</a></li>
+                <li id="search_student"><a href="{% url 'search_student' %}">Buscar estudiante</a></li>
+              </ul>
+            </li>
+            <li id="professor" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Profesores<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li id="create_professor"><a href="{% url 'create_professor' %}">Crear profesores</a></li>
+                <li id="search_professor"><a href="{% url 'search_professor' %}">Buscar profesores</a></li>
+              </ul>
+            </li>
+            <li id="documents" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Documentos<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Subir documento</a></li>
+                <li><a href="#">Consultar documentos</a></li>
+                <li><a href="#">Eliminar documentos</a></li>
+              </ul>
+            </li>
+            <li id="calendar" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Calendario<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Consultar calendario</a></li>
+                <li><a href="#">Crear fecha calendario</a></li>
+                <li><a href="#">Modificar fecha calendario</a></li>
+                <li><a href="#">Eliminar fecha calendario</a></li>
+              </ul>
+            </li>
+            <li id="admin" class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                 aria-expanded="false">Administración<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-header">Procesos de Titulación</li>
+                <li id="start_graduation_process"><a href="{% url 'start_graduation_process' %}">Iniciar Proceso de Titulación</a></li>
+                <li id="list_graduation_process"><a href="{% url 'list_graduation_process' %}">Listar Procesos de Titulación</a></li>
+                <li id="search_graduation_process"><a href="{% url 'search_graduation_process' %}">Buscar Procesos de Titulación</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Usuarios</li>
+                <li id="create_user"><a href="{% url 'create_user' %}">Crear Usuario</a></li>
+                <li id="search_user"><a href="{% url 'search_user' %}">Buscar Usuario</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Roles y permisos</li>
+                <li id="list_group"><a href="{% url 'list_groups' %}">Listar Roles</a></li>
+                <li id="create_group"><a href="{% url 'create_group' %}">Crear Rol</a></li>
+                <li id="search_group"><a href="{% url 'search_group' %}">Buscar Rol</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Flujos</li>
+                <li><a href="{% url 'list_waycalendar' %}">Definir Calendario del Semestre</a></li>
+                <li id="create_event"><a href="{% url 'create_event' %}">Crear Evento</a></li>
+                <li id="list_events"><a href="{% url 'list_events' %}">Listar Eventos</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Eventos Vía Calendario</li>
+                <li><a href="#">Crear Evento Vía Calendario</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Vías</li>
+                <li id="create_way"><a href="{% url 'create_way' %}">Crear Vía</a></li>
+                <li id="list_ways"><a href="{% url 'list_ways' %}">Listar Vías</a></li>
+                <li id="search_way"><a href="{% url 'search_way' %}">Buscar Vía</a></li>
+              </ul>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'logout' %}">Cerrar sesión</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+        {% endif %}
+      </div>
+    </nav>
+
+    <div class="bodycontainer container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          {% if messages %}
+            <ul class="messages">
+              {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                  <div class="alert alert-danger" role="alert">
+                    <strong>Error: </strong>{{ message }}
+                  </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                  <div class="alert alert-warning" role="alert">
+                    <strong>Advertencia: </strong>{{ message }}
+                  </div>
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                  <div class="alert alert-success" role="alert">
+                    {{ message }}
+                  </div>
+                {% else %}
+                  <div class="alert alert-info" role="alert">
+                    {{ message }}
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      </div>
+
+      {% block body %}
+      {% endblock %}
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{% static 'js/clickable-row.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')
+    </script> -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

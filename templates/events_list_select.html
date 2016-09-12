@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Listar eventos</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <form role="form" action="{% url 'list_events' %}" method="POST">
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <label class="control-label" for="id_way">{{ form.way.label }}</label>
+                                {{ form.way|addclass:'form-control' }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-default">Listar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_events")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

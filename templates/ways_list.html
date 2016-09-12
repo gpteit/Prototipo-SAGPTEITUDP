@@ -1,0 +1,83 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Buscar vía</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'search_way' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                {% csrf_token %}
+                                <label class="control-label" for="query">Nombre</label>
+                                <input class="form-control" type="text" name="query" value="{{ form.name }}" id="query">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-default">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Vías encontradas: {{ ways|length }}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-stripped text-center">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Vigente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for way in ways %}
+                                <tr class="clickable-row" data-url="{% url 'get_way' way.pk%}" >
+                                    <td>{{ way.name }}</td>
+                                    {% if way.end_date and way.ini_date %}
+                                        {% if way.end_date > today %}
+                                        <td>Si</td>
+                                        {% else %}
+                                        <td>No</td>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if way.ini_date %}
+                                            {% if way.ini_date > today %}
+                                                <td>No</td>
+                                            {% else %}
+                                                <td>Si</td>
+                                            {% endif %}
+                                        {% else %}
+                                            <td>No definido</td>
+                                        {% endif %}
+                                    {% endif %}
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="2">No se encontraron vías</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_ways")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

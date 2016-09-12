@@ -1,0 +1,82 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Buscar usuario</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'search_user' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="rut">RUT</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="rut" id="rut" value="{{ form.rut }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="first_name">Nombre</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="first_name" id="first_name" value="{{ form.first_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="last_name">Apellido</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="last_name" id="last_name" value="{{ form.last_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Usuarios encontrados: {{users|length}}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-stripped text-center">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>RUT</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>E-mail</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users %}
+                                <tr class="clickable-row" data-url="{% url 'get_user' user.pk %}">
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ user.username }}</td>
+                                    <td>{{ user.first_name }}</td>
+                                    <td>{{ user.last_name }}</td>
+                                    <td>{{ user.email }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="5">No se encontraron usuarios</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("search_user")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

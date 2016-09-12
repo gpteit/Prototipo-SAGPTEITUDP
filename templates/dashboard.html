@@ -1,0 +1,56 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Información General</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-stripped">
+                        <tbody>
+                            <tr>
+                                <td>procesos de titulación atrasados</td>
+                                <td>6</td>
+                            </tr>
+                            <tr>
+                                <td>procesos de titulación al día</td>
+                                <td>21</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+                    <table class="table table-bordered table-hover table-stripped">
+                        <thead>
+                            <tr>
+                                <td class="text-center" colspan="2">Estudiantes por vía</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for way in ways %}
+                            <tr>
+                                <td>{{ way.name }}</td>
+                                <td>{{ way.actual_quantity }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Foo</h3>
+                </div>
+                <div class="panel-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("dashboard")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

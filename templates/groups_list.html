@@ -1,0 +1,69 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Buscar Rol</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'search_group' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                {% csrf_token %}
+                                <label class="control-label" for="name">Nombre</label>
+                                <input class="form-control" type="text" name="name" value="{{ form.name }}" id="name">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-default">Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Roles encontrados: {{ groups|length }}</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-stripped text-center">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Permisos concedidos</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for group in groups %}
+                                <tr class="clickable-row" data-url="{% url 'get_group' group.pk%}" >
+                                    <td>{{ group.name }}</td>
+                                    <td>{{ group.permissions.all|length }}</td>
+                                </tr>
+                            {% empty %}
+                                <tr>
+                                    <td colspan="2">No se encontraron grupos</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_group")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

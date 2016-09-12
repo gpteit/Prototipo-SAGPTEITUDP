@@ -1,0 +1,46 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Buscar profesores</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'search_professor' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="rut">RUT</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="rut" id="rut" value="{{ se_form.rut }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="first_name">Nombre</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="first_name" id="first_name" value="{{ se_form.first_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="control-label col-md-2 col-md-offset-1" for="last_name">Apellido</label>
+                            <div class="col-md-8">
+                                <input class="form-control" type="text" name="last_name" id="last_name" value="{{ se_form.last_name }}">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-info">Buscar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("professor")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("search_professor")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

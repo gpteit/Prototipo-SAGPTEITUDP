@@ -1,0 +1,122 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Listar calendario de eventos</h3>
+                </div>
+                <div class="panel-body text-center">
+                    <form role="form" action="{% url 'list_waycalendar' %}" method="POST">
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <label class="control-label" for="id_way">{{ form.way.label }}</label>
+                                {{ form.way|addclass:'form-control' }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <label class="control-label" for="id_year">{{ form.year.label }}</label>
+                                {{ form.year|addclass:'form-control' }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-default">Listar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Lista de eventos y fechas año {{ year }}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <table class="table table-bordered table-hover table-stripped text-center">
+                            <thead>
+                                <tr>
+                                    <th>Correlativo</th>
+                                    <th>Evento</th>
+                                    <th>Asignar fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for event in events %}
+                                    <tr>
+                                        <td>{{ event.correlative }}</td>
+                                        <td><a href="{% url 'get_event' event.pk %}">{{ event }}</a></td>
+                                        <td>
+                                            {% if event.trigger_type != 'cantidad_dias' %}
+                                            <a class="btn btn-warning" href="{% url 'create_waycalendar' event.pk %}">Asignar fecha</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <table class="table table-bordered table-hover table-stripped text-center">
+                            <thead>
+                                <tr>
+                                    <th>Evento</th>
+                                    <th>Fecha asignada o días relativos a evento</th>
+                                    <th>Asignar fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                    <tr>
+                                        <td colspan="4"><strong>Primer Semestre</strong></td>
+                                    </tr>
+
+                                {% for waycalendar in waycalendars_1 %}
+                                    <tr>
+                                        <td><a href="{% url 'get_waycalendar' waycalendar.pk %}">{{ waycalendar.event }}</a></td>
+                                        <td>{{ waycalendar.date_ini|default:"No asignado" }}</td>
+                                        <td>
+                                            {% if waycalendar.event.trigger_type != 'cantidad_dias' %}
+                                                <a class="btn btn-warning" href="{% url 'edit_waycalendar' waycalendar.pk %}">Editar</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="4">No existen fechas definidas</td>
+                                    </tr>
+                                {% endfor %}
+                                    <tr>
+                                        <td colspan="4"><strong>Segundo Semestre</strong></td>
+                                    </tr>
+                                {% for waycalendar in waycalendars_2 %}
+                                    <tr>
+                                        <td><a href="{% url 'get_waycalendar' waycalendar.pk %}">{{ waycalendar.event }}</a></td>
+                                        <td>{{ waycalendar.date_ini|default:"No asignado" }}</td>
+                                        <td>
+                                            {% if waycalendar.event.trigger_type != 'cantidad_dias' %}
+                                                <a class="btn btn-warning" href="{% url 'edit_waycalendar' waycalendar.pk %}">Editar</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="4">No existen fechas definidas</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_waycalendar")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Crear Rol</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'create_group' %}" method="POST">
+                        {% if group_form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>No se ha podido completar la acción debido a que:</strong>
+                                {{ group_form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1 {% if group_form.name.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ group_form.name.label }}">{{ group_form.name.label }}</label>
+                                {{ group_form.name|addclass:'form-control' }}
+                                {% if group_form.name.help_text %}
+                                    <p class="help-block">{{ group_form.name.help_text }}</p>
+                                {% endif %}
+                                {% if group_form.name.errors %}
+                                    <span class="help-block"><strong>{{ group_form.name.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+                                {{ group_form.permissions|addclass:'form-control tall-form-control' }}
+                                {% if group_form.permissions.help_text %}
+                                    <p class="help-block">{{ group_form.permissions.help_text }}</p>
+                                {% endif %}
+                                {% if group_form.permissions.errors %}
+                                    <span class="help-block"><strong>{{ group_form.permissions.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <div class="form-group col-md-10 col-md-offset-1">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-default">Crear</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("create_group")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

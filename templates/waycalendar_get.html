@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Calendario de Evento</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <table class="table table-bordered table-hover table-stripped">
+                                <tbody>
+                                    <tr>
+                                        <td>Evento</td>
+                                        <td>{{ waycalendar.event }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Año</td>
+                                        <td>{{ waycalendar.year }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Semestre</td>
+                                        <td>{{ waycalendar.semester }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción</td>
+                                        <td>{{ waycalendar.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de inicio</td>
+                                        <td>{{ waycalendar.date_ini }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hora de inicio</td>
+                                        <td>{{ waycalendar.time_ini }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de término</td>
+                                        <td>{{ waycalendar.date_ened }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Lugar</td>
+                                        <td>{{ waycalendar.place }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_events")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

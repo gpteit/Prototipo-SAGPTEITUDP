@@ -1,0 +1,120 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Asignar fecha a evento "{{ waycalendar.event }}"</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'edit_waycalendar' waycalendar.pk %}" method="POST">
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>No se ha podido completar la acción debido a que:</strong>
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <input type="hidden" name="event" value="{{ waycalendar.event.pk }}">
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.year.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.year.label }}">{{ form.year.label }}</label>
+                                {{ form.year|addclass:'form-control' }}
+                                {% if form.year.help_text %}
+                                    <p class="help-block">{{ form.year.help_text }}</p>
+                                {% endif %}
+                                {% if form.year.errors %}
+                                    <span class="help-block"><strong>{{ form.year.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.semester.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.semester.label }}">{{ form.semester.label }}</label>
+                                {{ form.semester|addclass:'form-control' }}
+                                {% if form.semester.help_text %}
+                                    <p class="help-block">{{ form.semester.help_text }}</p>
+                                {% endif %}
+                                {% if form.semester.errors %}
+                                    <span class="help-block"><strong>{{ form.semester.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.description.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.description.label }}">{{ form.description.label }}</label>
+                                {{ form.description|addclass:'form-control' }}
+                                {% if form.description.help_text %}
+                                    <p class="help-block">{{ form.description.help_text }}</p>
+                                {% endif %}
+                                {% if form.description.errors %}
+                                    <span class="help-block"><strong>{{ form.description.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.date_ini.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.date_ini.label }}">{{ form.date_ini.label }}</label>
+                                {{ form.date_ini|addclass:'form-control' }}
+                                {% if form.date_ini.help_text %}
+                                    <p class="help-block">{{ form.date_ini.help_text }}</p>
+                                {% endif %}
+                                {% if form.date_ini.errors %}
+                                    <span class="help-block"><strong>{{ form.date_ini.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.time_ini.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.time_ini.label }}">{{ form.time_ini.label }}</label>
+                                {{ form.time_ini|addclass:'form-control' }}
+                                {% if form.time_ini.help_text %}
+                                    <p class="help-block">{{ form.time_ini.help_text }}</p>
+                                {% endif %}
+                                {% if form.time_ini.errors %}
+                                    <span class="help-block"><strong>{{ form.time_ini.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.date_end.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.date_end.label }}">{{ form.date_end.label }}</label>
+                                {{ form.date_end|addclass:'form-control' }}
+                                {% if form.date_end.help_text %}
+                                    <p class="help-block">{{ form.date_end.help_text }}</p>
+                                {% endif %}
+                                {% if form.date_end.errors %}
+                                    <span class="help-block"><strong>{{ form.date_end.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.place.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.place.label }}">{{ form.place.label }}</label>
+                                {{ form.place|addclass:'form-control' }}
+                                {% if form.place.help_text %}
+                                    <p class="help-block">{{ form.place.help_text }}</p>
+                                {% endif %}
+                                {% if form.place.errors %}
+                                    <span class="help-block"><strong>{{ form.place.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-default">Editar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("create_waycalendar")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Procesos de titulación</h3>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered table-hover table-stripped text-center">
+                        <thead>
+                            <tr>
+                                <th>Estudiante</th>
+                                <th>Estado</th>
+                                <th>Vía</th>
+                                <th>Año de inscripción</th>
+                                <th>Semestre</th>
+                                <th>Última actualización</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% load humanize %}
+                            {% for gp in gps %}
+                            <tr class="clickable-row" data-url="{% url 'get_graduation_process' gp.pk %}">
+                                <td>{{ gp.student }}</td>
+                                <td>{{ gp.status }}</td>
+                                <td>{{ gp.way }}</td>
+                                <td>{{ gp.created_at.year }}</td>
+                                <td>{{ gp.semester }}</td>
+                                <td>Hace {{ gp.updated_at|timesince }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_graduation_process")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

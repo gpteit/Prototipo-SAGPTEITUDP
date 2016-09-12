@@ -1,0 +1,167 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Crear eventos</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'create_event' %}" method="POST">
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>No se ha podido completar la acción debido a que:</strong>
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.type.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.way.label }}">{{ form.way.label }}</label>
+                                {{ form.way|addclass:'form-control' }}
+                                {% if form.way.help_text %}
+                                    <p class="help-block">{{ form.way.help_text }}</p>
+                                {% endif %}
+                                {% if form.way.errors %}
+                                    <span class="help-block"><strong>{{ form.way.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.correlative.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.correlative.label }}">{{ form.correlative.label }}</label>
+                                {{ form.correlative|addclass:'form-control' }}
+                                {% if form.correlative.help_text %}
+                                    <p class="help-block">{{ form.correlative.help_text }}</p>
+                                {% endif %}
+                                {% if form.correlative.errors %}
+                                    <span class="help-block"><strong>{{ form.correlative.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.type.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.type.label }}">{{ form.type.label }}</label>
+                                {{ form.type|addclass:'form-control' }}
+                                {% if form.type.help_text %}
+                                    <p class="help-block">{{ form.type.help_text }}</p>
+                                {% endif %}
+                                {% if form.type.errors %}
+                                    <span class="help-block"><strong>{{ form.type.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.abbr.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.abbr.label }}">{{ form.abbr.label }}</label>
+                                {{ form.abbr|addclass:'form-control' }}
+                                {% if form.abbr.help_text %}
+                                    <p class="help-block">{{ form.abbr.help_text }}</p>
+                                {% endif %}
+                                {% if form.abbr.errors %}
+                                    <span class="help-block"><strong>{{ form.abbr.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.description.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.description.label }}">{{ form.description.label }}</label>
+                                {{ form.description|addclass:'form-control' }}
+                                {% if form.description.help_text %}
+                                    <p class="help-block">{{ form.description.help_text }}</p>
+                                {% endif %}
+                                {% if form.description.errors %}
+                                    <span class="help-block"><strong>{{ form.description.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.trigger_type.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.trigger_type.label }}">{{ form.trigger_type.label }}</label>
+                                {{ form.trigger_type|addclass:'form-control' }}
+                                {% if form.trigger_type.help_text %}
+                                    <p class="help-block">{{ form.trigger_type.help_text }}</p>
+                                {% endif %}
+                                {% if form.trigger_type.errors %}
+                                    <span class="help-block"><strong>{{ form.trigger_type.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.involved_event.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.involved_event.label }}">{{ form.involved_event.label }}</label>
+                                {{ form.involved_event|addclass:'form-control' }}
+                                {% if form.involved_event.help_text %}
+                                    <p class="help-block">{{ form.involved_event.help_text }}</p>
+                                {% endif %}
+                                {% if form.involved_event.errors %}
+                                    <span class="help-block"><strong>{{ form.involved_event.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.reference_days.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.reference_days.label }}">{{ form.reference_days.label }}</label>
+                                {{ form.reference_days|addclass:'form-control' }}
+                                {% if form.reference_days.help_text %}
+                                    <p class="help-block">{{ form.reference_days.help_text }}</p>
+                                {% endif %}
+                                {% if form.reference_days.errors %}
+                                    <span class="help-block"><strong>{{ form.reference_days.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.involved_document.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.involved_document.label }}">{{ form.involved_document.label }}</label>
+                                {{ form.involved_document|addclass:'form-control' }}
+                                {% if form.involved_document.help_text %}
+                                    <p class="help-block">{{ form.involved_document.help_text }}</p>
+                                {% endif %}
+                                {% if form.involved_document.errors %}
+                                    <span class="help-block"><strong>{{ form.involved_document.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.to_users.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.to_users.label }}">{{ form.to_users.label }}</label>
+                                {{ form.to_users|addclass:'form-control' }}
+                                {% if form.to_users.help_text %}
+                                    <p class="help-block">{{ form.to_users.help_text }}</p>
+                                {% endif %}
+                                {% if form.to_users.errors %}
+                                    <span class="help-block"><strong>{{ form.to_users.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if form.owner_user.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ form.owner_user.label }}">{{ form.owner_user.label }}</label>
+                                {{ form.owner_user|addclass:'form-control' }}
+                                {% if form.owner_user.help_text %}
+                                    <p class="help-block">{{ form.owner_user.help_text }}</p>
+                                {% endif %}
+                                {% if form.owner_user.errors %}
+                                    <span class="help-block"><strong>{{ form.owner_user.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-default">Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("create_event")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

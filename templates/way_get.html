@@ -1,0 +1,85 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h3 class="panel-title">Buscar vía</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" action="{% url 'search_way' %}" method="POST">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-md-10 col-md-offset-1">
+                                        {% csrf_token %}
+                                        <label class="control-label" for="query">Nombre</label>
+                                        <input class="form-control" type="text" name="query" id="query">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <br>
+                                    <div class="form-group col-md-10 col-md-offset-1">
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-default">Buscar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <h3 class="panel-title">Vía</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-bordered table-hover table-stripped text-center">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"><strong>{{ way.name }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de inicio vigencia</td>
+                                        <td><strong>{{ way.ini_date }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de termino vigencia</td>
+                                        <td><strong>{{ way.end_date }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Fecha de ultima actualización de la vía</td>
+                                        <td><strong>{{ way.update_date }}</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <form action="{% url 'delete_way' %}" method="POST">
+                                                {% csrf_token %}
+                                                <a class="btn btn-warning" href="{% url 'edit_way' way.pk %}">Editar</a>
+                                                <input type="hidden" name="pk" value="{{ way.pk }}">
+                                                <button class="btn btn-danger confirmation" type="submit">Eliminar</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("search_way")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

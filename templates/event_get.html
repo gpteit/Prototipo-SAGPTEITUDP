@@ -1,0 +1,72 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Evento</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <table class="table table-bordered table-hover table-stripped">
+                                <tbody>
+                                    <tr>
+                                        <td>Vía</td>
+                                        <td>{{ event.way }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Correlativo</td>
+                                        <td>{{ event.correlative }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipo de evento</td>
+                                        <td>{{ event.get_type_display }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Abreviación</td>
+                                        <td>{{ event.abbr }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Descripción</td>
+                                        <td>{{ event.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tipo de trigger</td>
+                                        <td>{{ event.get_trigger_type_display }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Evento involucrado</td>
+                                        <td>{{ event.involved_event }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Días de referencia</td>
+                                        <td>{{ event.reference_days }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Documento involucrado</td>
+                                        <td>{{ event.involved_document }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Para usuarios</td>
+                                        <td>event.to_users.all</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usuario responsable</td>
+                                        <td>{{ event.owner_user }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_events")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

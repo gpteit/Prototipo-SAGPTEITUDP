@@ -1,0 +1,107 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Crear Estudiante</h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form" action="{% url 'create_student' %}" method="POST">
+                        {% if user_form.non_field_errors %}
+                            <div class="alert alert-danger" role="alert">
+                                <strong>No se ha podido completar la acción debido a que:</strong>
+                                {{ user_form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        {% load customfilters %}
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1" {% if user_form.first_name.errors %} has-error{% endif %}>
+                                <label class="control-label" for="{{ user_form.first_name.label }}">{{ user_form.first_name.label }}</label>
+                                {{ user_form.first_name|addclass:'form-control' }}
+                                {% if user_form.first_name.help_text %}
+                                    <p class="help-block">{{ user_form.first_name.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.first_name.errors %}
+                                    <span class="help-block"><strong>{{ user_form.first_name.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if user_form.last_name.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ user_form.last_name.label }}">{{ user_form.last_name.label }}</label>
+                                {{ user_form.last_name|addclass:'form-control' }}
+                                {% if user_form.last_name.help_text %}
+                                    <p class="help-block">{{ user_form.last_name.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.last_name.errors %}
+                                    <span class="help-block"><strong>{{ user_form.last_name.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group form-group col-md-10 col-md-offset-1{% if user_form.rut.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ user_form.rut.label }}">{{ user_form.rut.label }}</label>
+                                {{ user_form.rut|addclass:'form-control' }}
+                                {% if user_form.rut.help_text %}
+                                    <p class="help-block">{{ user_form.rut.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.rut.errors %}
+                                    <span class="help-block"><strong>{{ user_form.rut.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if user_form.email.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ user_form.email.label }}">{{ user_form.email.label }}</label>
+                                {{ user_form.email|addclass:'form-control' }}
+                                {% if user_form.email.help_text %}
+                                    <p class="help-block">{{ user_form.email.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.email.errors %}
+                                    <span class="help-block"><strong>{{ user_form.email.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if user_form.password.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ user_form.password.label }}">{{ user_form.password.label }}</label>
+                                {{ user_form.password|addclass:'form-control' }}
+                                {% if user_form.password.help_text %}
+                                    <p class="help-block">{{ user_form.password.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.password.errors %}
+                                    <span class="help-block"><strong>{{ user_form.password.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-10 col-md-offset-1{% if user_form.password2.errors %} has-error{% endif %}">
+                                <label class="control-label" for="{{ user_form.password2.label }}">{{ user_form.password2.label }}</label>
+                                {{ user_form.password2|addclass:'form-control' }}
+                                {% if user_form.password2.help_text %}
+                                    <p class="help-block">{{ user_form.password2.help_text }}</p>
+                                {% endif %}
+                                {% if user_form.password2.errors %}
+                                    <span class="help-block"><strong>{{ user_form.password2.errors }}</strong></span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-default">Registrar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("student")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("create_student")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

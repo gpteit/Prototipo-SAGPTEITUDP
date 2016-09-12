@@ -1,0 +1,119 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">{%if show_form %}Crear reporte para evento: {% if is_student %}{{ next_task.event }}{% endif %}{% else %}No existen reportes que generar{% endif%}</h3>
+                </div>
+                <div class="panel-body">
+                    {% if is_student %}
+                        {% if show_form %}
+                            <form role="form" action="{% url 'create_report' %}" method="POST">
+                                {% if form.non_field_errors %}
+                                    <div class="alert alert-danger" role="alert">
+                                        <strong>No se ha podido completar la acción debido a que:</strong>
+                                        {{ form.non_field_errors }}
+                                    </div>
+                                {% endif %}
+                                {% load customfilters %}
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="form-group col-md-10 col-md-offset-1{% if form.description.errors %} has-error{% endif %}">
+                                        <label class="control-label" for="{{ form.description.label }}">{{ form.description.label }}</label>
+                                        {{ form.description|addclass:'form-control' }}
+                                        {% if form.description.help_text %}
+                                            <p class="help-block">{{ form.description.help_text }}</p>
+                                        {% endif %}
+                                        {% if form.description.errors %}
+                                            <span class="help-block"><strong>{{ form.description.errors }}</strong></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-10 col-md-offset-1{% if form.involved_document.errors %} has-error{% endif %}">
+                                        <label class="control-label" for="{{ form.involved_document.label }}">{{ form.involved_document.label }}</label>
+                                        {{ form.involved_document|addclass:'form-control' }}
+                                        {% if form.involved_document.help_text %}
+                                            <p class="help-block">{{ form.involved_document.help_text }}</p>
+                                        {% endif %}
+                                        {% if form.involved_document.errors %}
+                                            <span class="help-block"><strong>{{ form.involved_document.errors }}</strong></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-default">Reportar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <form role="form" action="{% url 'create_report' %}" method="POST">
+                            {% if form.non_field_errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    <strong>No se ha podido completar la acción debido a que:</strong>
+                                    {{ form.non_field_errors }}
+                                </div>
+                            {% endif %}
+                            {% load customfilters %}
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="form-group col-md-10 col-md-offset-1{% if form.student.errors %} has-error{% endif %}">
+                                    <label class="control-label" for="{{ form.student.label }}">{{ form.student.label }}</label>
+                                    <select name="student" class="form-control">
+                                        {% for choice in choices %}
+                                        <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                                        {% endfor %}
+                                    </select>
+                                    {% if form.student.help_text %}
+                                        <p class="help-block">{{ form.student.help_text }}</p>
+                                    {% endif %}
+                                    {% if form.student.errors %}
+                                        <span class="help-block"><strong>{{ form.student.errors }}</strong></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10 col-md-offset-1{% if form.description.errors %} has-error{% endif %}">
+                                    <label class="control-label" for="{{ form.description.label }}">{{ form.description.label }}</label>
+                                    {{ form.description|addclass:'form-control' }}
+                                    {% if form.description.help_text %}
+                                        <p class="help-block">{{ form.description.help_text }}</p>
+                                    {% endif %}
+                                    {% if form.description.errors %}
+                                        <span class="help-block"><strong>{{ form.description.errors }}</strong></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-10 col-md-offset-1{% if form.involved_document.errors %} has-error{% endif %}">
+                                    <label class="control-label" for="{{ form.involved_document.label }}">{{ form.involved_document.label }}</label>
+                                    {{ form.involved_document|addclass:'form-control' }}
+                                    {% if form.involved_document.help_text %}
+                                        <p class="help-block">{{ form.involved_document.help_text }}</p>
+                                    {% endif %}
+                                    {% if form.involved_document.errors %}
+                                        <span class="help-block"><strong>{{ form.involved_document.errors }}</strong></span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-default">Reportar</button>
+                                </div>
+                            </div>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("report")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("create_report")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

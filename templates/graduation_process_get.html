@@ -1,0 +1,72 @@
+{% extends "_base.html" %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-heading text-center">
+                    <h3 class="panel-title">Proceso de titulación</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <table class="table table-bordered table-hover table-stripped">
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Estudiante</strong></td>
+                                        <td>{{ gp.student.first_name }} {{ gp.student.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RUT del estudiante</strong></td>
+                                        <td>{{ gp.student.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Estado</strong></td>
+                                        <td>{{ gp.status }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Vía</strong></td>
+                                        <td>{{ gp.way }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Descripción</strong></td>
+                                        <td>{{ gp.description }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Fecha de inscripción</strong></td>
+                                        <td>{{ gp.created_at }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Semestre</strong></td>
+                                        <td>{{ gp.semester }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Profesor guía</strong></td>
+                                        <td>{{ gp.professor.first_name }} {{ gp.professor.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RUT del profesor guía</strong></td>
+                                        <td>{{ gp.professor.username }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Profesor de comisión</strong></td>
+                                        <td>{{ gp.c_professor.first_name }} {{ gp.c_professor.last_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>RUT del profesor de comisión</strong></td>
+                                        <td>{{ gp.c_professor.username }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        menu_item = document.getElementById("admin")
+        menu_item.setAttribute("class", "active")
+        menu_item = document.getElementById("list_events")
+        menu_item.setAttribute("class", "active")
+    </script>
+{% endblock %}

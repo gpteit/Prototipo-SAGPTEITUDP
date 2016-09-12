@@ -1,0 +1,13 @@
+body {
+  padding-top: 50px;
+}
+
+.bodycontainer{
+	margin-top: 30px;
+}
+
+tr.clickable-row {cursor: pointer; }
+
+.tall-form-control {height: 300px !important;}
+
+th{text-align: center !important;}
